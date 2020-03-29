@@ -174,7 +174,7 @@
   (for [country-cases jh/confirmed
         [date cases] country-cases]
     (if-not (or (= date :lat) (= date :long) (= date :province-state) (= date :country-region))
-      {:time (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd") date)
+      {:time date
        :country (:country-region country-cases)
        :cases cases
        })))
@@ -183,6 +183,7 @@
  (merge-with merge oz-config map-dimensions
              {:data {:values (remove #(or (not (= (:country %) "Brazil"))
                                           (nil? %)) south-america-cases-per-day)}
-              :encoding {:x {:field "time" :type "quantitative"}
+              :mark "line"
+              :encoding {:x {:field "time" :type "nominal"}
                          :y {:field "cases" :type "quantitative"}}}))
          
