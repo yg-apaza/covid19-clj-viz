@@ -89,7 +89,7 @@
              :anchor "middle"}}))
 
 (def map-dimensions
-  {:width 550 :height 700})
+  {:width 1000 :height 600})
 
 (oz/view!
  (merge-with merge oz-config map-dimensions
