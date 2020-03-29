@@ -169,3 +169,20 @@
                                    {:field "cases" :type  "quantitative"}
                                    {:field "cases-per-100k" :type "quantitative"}]}
               :selection {:highlight {:on "mouseover" :type "single"}}}))
+
+(def south-america-cases-per-day
+  (for [country-cases jh/confirmed
+        [date cases] country-cases]
+    (if-not (or (= date :lat) (= date :long) (= date :province-state) (= date :country-region))
+      {:time (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd") date)
+       :country (:country-region country-cases)
+       :cases cases
+       })))
+
+(oz/view!
+ (merge-with merge oz-config map-dimensions
+             {:data {:values (remove #(or (not (= (:country %) "Brazil"))
+                                          (nil? %)) south-america-cases-per-day)}
+              :encoding {:x {:field "time" :type "quantitative"}
+                         :y {:field "cases" :type "quantitative"}}}))
+         
