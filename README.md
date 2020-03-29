@@ -38,6 +38,9 @@ other, similar ways:
    charts, choropleths
  - `china` and `deutschland` are for transforming country-specific
    data in support of visualizations
+ - `worldometer` scraps data from [Worldometer](https://www.worldometers.info/coronavirus/)
+   and visualizes the total cases of COVID-19 on a world map.
+   ![world](screenshot-world.png)
  - `source/*` namespaces are for parsing of source data (e.g. Johns
    Hopkins, the World Bank) into usable structures
 
